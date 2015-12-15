@@ -1,5 +1,6 @@
 package com.jixstreet.spaace.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -21,6 +22,7 @@ import android.widget.TextView;
 
 import com.jixstreet.spaace.R;
 import com.jixstreet.spaace.fragment.ContactFragment;
+import com.jixstreet.spaace.fragment.EditProfileFragment;
 import com.jixstreet.spaace.fragment.QuoteFragment;
 
 
@@ -29,6 +31,7 @@ public class MainActivity extends AppCompatActivity
 
     private Toolbar toolbar;
     private TextView toolbarTitle;
+    private  DrawerLayout drawer;
 
     private Fragment fragment;
 
@@ -41,7 +44,7 @@ public class MainActivity extends AppCompatActivity
         toolbarTitle = (TextView) findViewById(R.id.toolbar_title);
         setSupportActionBar(toolbar);
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
@@ -60,7 +63,8 @@ public class MainActivity extends AppCompatActivity
 //        toolbarTitle.setText(getString(R.string.explore));
 //        if (fragment != null) {
 //            getSupportFragmentManager().beginTransaction().replace(R.id.content, fragment).commit();
-//        }/
+//        }
+
 
         imageProfile.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,6 +73,24 @@ public class MainActivity extends AppCompatActivity
                 nameProfile.setText("Jeese Heisenberg");
             }
         });
+
+        nameProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                fragment = EditProfileFragment.newInstance(MainActivity.this);
+                toolbarTitle.setText(getString(R.string.edit_profile));
+                drawer.closeDrawer(GravityCompat.START);
+                getSupportFragmentManager().beginTransaction().replace(R.id.content, fragment).commit();
+            }
+        });
+
+        findViewById(R.id.content).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, ExploreDetailActivity.class));
+            }
+        });
+
 
     }
 
@@ -105,7 +127,6 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -148,7 +169,6 @@ public class MainActivity extends AppCompatActivity
             fragmentTransaction.commit();
         }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }

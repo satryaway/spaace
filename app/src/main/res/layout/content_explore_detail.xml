@@ -1,0 +1,397 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_below="@+id/appbar">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/image_header"
+            android:layout_width="match_parent"
+            android:layout_height="225dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/bg_sample" />
+
+        <LinearLayout
+            android:id="@+id/option"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/image_header"
+            android:background="@android:color/white"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:padding="@dimen/activity_horizontal_margin">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="33"
+                android:gravity="center">
+
+                <TextView
+                    android:id="@+id/house_type"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_weight="33"
+                    android:text="@string/house_type"
+                    android:textAllCaps="true" />
+
+                <TextView
+                    android:id="@+id/house_type_content"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/house_type"
+                    android:layout_centerHorizontal="true"
+                    android:layout_weight="33"
+                    android:paddingTop="@dimen/activity_horizontal_margin"
+                    android:text="Condo"
+                    android:textAllCaps="true"
+                    android:textStyle="bold" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="33"
+                android:gravity="center">
+
+                <TextView
+                    android:id="@+id/bedroom"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_weight="33"
+                    android:text="@string/bedroom"
+                    android:textAllCaps="true" />
+
+                <TextView
+                    android:id="@+id/bedroom_content"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/bedroom"
+                    android:layout_centerHorizontal="true"
+                    android:layout_weight="33"
+                    android:paddingTop="@dimen/activity_horizontal_margin"
+                    android:text="3 Rooms"
+                    android:textAllCaps="true"
+                    android:textStyle="bold" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="33"
+                android:gravity="center">
+
+                <TextView
+                    android:id="@+id/size"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_weight="33"
+                    android:text="@string/size"
+                    android:textAllCaps="true" />
+
+                <TextView
+                    android:id="@+id/size_content"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/size"
+                    android:layout_centerHorizontal="true"
+                    android:layout_weight="33"
+                    android:paddingTop="@dimen/activity_horizontal_margin"
+                    android:text="189 m²"
+                    android:textAllCaps="true"
+                    android:textStyle="bold" />
+            </RelativeLayout>
+
+        </LinearLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/detail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/option"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:background="@android:color/white"
+            android:padding="@dimen/activity_vertical_margin">
+
+
+            <TextView
+                android:id="@+id/new_resale"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:padding="10dp"
+                android:text="@string/new_resale" />
+
+            <TextView
+                android:id="@+id/new_resale_content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:padding="10dp"
+                android:text="Resale"
+                android:textStyle="bold" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_below="@+id/new_resale"
+                android:background="@color/colorPrimary" />
+
+            <TextView
+                android:id="@+id/year_of_completion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/new_resale"
+                android:padding="10dp"
+                android:text="@string/year_of_completion" />
+
+            <TextView
+                android:id="@+id/year_of_completion_content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/new_resale"
+                android:padding="10dp"
+                android:text="1990"
+                android:textStyle="bold" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_below="@+id/year_of_completion"
+                android:background="@color/colorPrimary" />
+
+            <TextView
+                android:id="@+id/style_house"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/year_of_completion"
+                android:padding="10dp"
+                android:text="@string/style" />
+
+            <TextView
+                android:id="@+id/style_house_content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/year_of_completion"
+                android:padding="10dp"
+                android:text="Contemporary"
+                android:textStyle="bold" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_below="@+id/style_house"
+                android:background="@color/colorPrimary" />
+
+            <TextView
+                android:id="@+id/renovation_duration"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/style_house"
+                android:padding="10dp"
+                android:text="@string/renovation_duration" />
+
+            <TextView
+                android:id="@+id/renovation_duration_content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/style_house"
+                android:padding="10dp"
+                android:text="10 Weeks"
+                android:textStyle="bold" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_below="@+id/renovation_duration"
+                android:background="@color/colorPrimary" />
+
+            <TextView
+                android:id="@+id/design_fees"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/renovation_duration"
+                android:padding="10dp"
+                android:text="@string/design_fees" />
+
+            <TextView
+                android:id="@+id/design_fees_content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/renovation_duration"
+                android:padding="10dp"
+                android:text="$ 4.500"
+                android:textStyle="bold" />
+
+        </RelativeLayout>
+
+
+        <TextView
+            android:id="@+id/works_included"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/detail"
+            android:layout_margin="@dimen/activity_horizontal_margin"
+            android:background="@drawable/grey_border_transparent_box"
+            android:drawableRight="@drawable/ic_arrow_right"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="@string/works_included"
+            android:textAllCaps="true"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/about_this_professional"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/works_included"
+            android:layout_margin="@dimen/activity_horizontal_margin"
+            android:text="@string/about_this_professional"
+            android:textAllCaps="true" />
+
+        <RelativeLayout
+            android:id="@+id/about_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/about_this_professional"
+            android:background="@android:color/white"
+            android:padding="@dimen/activity_horizontal_margin">
+
+            <ImageView
+                android:id="@+id/about_image"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:src="@drawable/ic_avatar_sample" />
+
+            <TextView
+                android:id="@+id/about_content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                android:layout_toRightOf="@+id/about_image"
+                android:drawablePadding="5dp"
+                android:drawableRight="@drawable/ic_arrow_right_2"
+                android:ellipsize="end"
+                android:lines="3"
+                android:text="M3 Studio is a vision created by an aspiring individual with the intention of bringing life and meaning to interior spaces through visual form and structure. We believe that an interior space is an extension of its occupant's character and personality and thus its design shall be personalised towards achieving that. Our motto of interior design being 'An artistic creation of one's expression' puts everything we believe in perspective. We provide design consultancy and project management services relating to renovation works in residential and commercial units." />
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/reviews"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/about_layout"
+            android:layout_margin="@dimen/activity_horizontal_margin"
+            android:text="@string/reviews"
+            android:textAllCaps="true" />
+
+        <RelativeLayout
+            android:id="@+id/reviews_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/reviews"
+            android:background="@android:color/white"
+            android:padding="@dimen/activity_horizontal_margin">
+
+            <ImageView
+                android:id="@+id/reviews_iamge"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:src="@drawable/ic_avatar_sample" />
+
+            <TextView
+                android:id="@+id/reviews_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                android:layout_toRightOf="@+id/reviews_iamge"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:text="Janivy Chang, Double Bay Residence"
+                android:textStyle="bold" />
+
+            <RatingBar
+                android:id="@+id/ratingBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/reviews_iamge"
+                android:layout_below="@+id/reviews_title"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                android:layout_toRightOf="@+id/reviews_iamge"
+                android:foregroundGravity="center_vertical"
+                android:gravity="center_vertical"
+                android:max="5"
+                android:numStars="5"
+                android:progressDrawable="@drawable/rating_bar"
+                android:rating="5"
+                android:stepSize="1" />
+
+            <TextView
+                android:id="@+id/reviews_content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/reviews_iamge"
+                android:layout_centerVertical="true"
+                android:layout_marginBottom="@dimen/activity_horizontal_margin"
+                android:layout_marginTop="@dimen/activity_horizontal_margin"
+                android:ellipsize="end"
+                android:lines="7"
+                android:text="I found out about this company from Facebook. We had 3 designers in mind, but I like the style proposed by Montie that also matches my budget. I especially like the cupboard which has a bold design, and meets my need for storage space. I appreciate the prompt service, as my move-in period coincided with Chinese New Year. They handed over in time as promised. I needed their after-sales service as my shelf had a problem with the laminate peeling. It was fixed the next day. " />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_below="@+id/reviews_content"
+                android:background="@color/colorPrimary" />
+
+            <TextView
+                android:id="@+id/reviews_more"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/reviews_content"
+                android:layout_marginTop="@dimen/activity_horizontal_margin"
+                android:drawablePadding="5dp"
+                android:drawableRight="@drawable/ic_arrow_right_2"
+                android:ellipsize="end"
+                android:gravity="center_vertical"
+                android:singleLine="true"
+                android:text="Read More Review (10)" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/other_project"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/reviews_layout"
+            android:layout_margin="@dimen/activity_horizontal_margin"
+            android:text="@string/other_project"
+            android:textAllCaps="true" />
+
+        <org.lucasr.twowayview.TwoWayView
+            android:id="@+id/grid_other_project"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/other_project"
+            android:layout_marginBottom="80dp"
+            android:orientation="horizontal"
+            android:padding="@dimen/activity_horizontal_margin" />
+    </RelativeLayout>
+</ScrollView>

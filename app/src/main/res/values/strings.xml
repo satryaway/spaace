@@ -5,6 +5,7 @@
     <string name="sign_up">Sign Up</string>
     <string name="email_address">Email Address</string>
     <string name="password">Password</string>
+    <string name="passwordAllCaps">PASSWORD</string>
     <string name="forgot_password">Forgot Password</string>
     <string name="RTO">Request Timed Out</string>
     <string name="SERVER_DOWN_MSG">Server down.</string>
@@ -12,6 +13,7 @@
     <string name="Succeed">SUCCEED</string>
     <string name="create_account">Create New Account</string>
     <string name="full_name">Full Name</string>
+    <string name="full_nameAllCaps">FULL NAME</string>
     <string name="terms_of_services">Terms of Service and Privacy Policy</string>
     <string name="should_not_be_empty">This field should not be empty</string>
     <string name="email_not_valid">Please input a valid email address</string>
@@ -37,5 +39,23 @@
     <string name="navigation_drawer_close">Close</string>
     <string name="search">Search</string>
     <string name="login_or_signup">Login or Signup</string>
+    <string name="house_type">House Type</string>
+    <string name="bedroom">Bedroom</string>
+    <string name="size">Size</string>
+    <string name="year_of_completion">Year of Completion</string>
+    <string name="style">Style</string>
+    <string name="renovation_duration">Renovation Duration</string>
+    <string name="design_fees">Design Fees</string>
+    <string name="works_included">Works Included</string>
+    <string name="about_this_professional">About this professional</string>
+    <string name="reviews">Reviews</string>
+    <string name="other_project">OTHER PROJECTS BY THIS PROFESSIONAL</string>
+    <string name="sms">sms</string>
+    <string name="email">Email</string>
+    <string name="emailAllCaps">EMAIL</string>
+    <string name="default_region">DEFAULT REGION</string>
+    <string name="save_profile">Save Profile</string>
+    <string name="edit">Edit</string>
+    <string name="edit_profile">Edit Profile</string>
 
 </resources>
