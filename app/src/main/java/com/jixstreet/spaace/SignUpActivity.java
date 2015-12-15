@@ -127,6 +127,15 @@ public class SignUpActivity extends BaseActivity {
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 signUpTV.setVisibility(View.VISIBLE);
                 signUpTV.setText(R.string.Succeed);
+
+                try {
+                    JSONObject object = response.getJSONObject(CommonConstants.META);
+                    Toast.makeText(SignUpActivity.this, object.getString(CommonConstants.MESSAGE), Toast.LENGTH_SHORT).show();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                onBackPressed();
             }
 
             @Override

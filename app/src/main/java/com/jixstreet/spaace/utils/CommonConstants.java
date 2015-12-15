@@ -17,4 +17,5 @@ public class CommonConstants {
     public static String API_TOKEN = "API_TOKEN";
     public static String SPAACE = "SPAACE";
     public static String ACCESS_TOKEN = "access_token";
+    public static String MESSAGE = "message";
 }
