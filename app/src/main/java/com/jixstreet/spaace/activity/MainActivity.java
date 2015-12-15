@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity
 //        toolbarTitle.setText(getString(R.string.explore));
 //        if (fragment != null) {
 //            getSupportFragmentManager().beginTransaction().replace(R.id.content, fragment).commit();
-//        }
+//        }/
 
         imageProfile.setOnClickListener(new View.OnClickListener() {
             @Override
