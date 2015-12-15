@@ -17,7 +17,8 @@
     <string name="terms_of_services">Terms of Service and Privacy Policy</string>
     <string name="should_not_be_empty">This field should not be empty</string>
     <string name="email_not_valid">Please input a valid email address</string>
-
+    <string name="api_token_header">L4H2KZLNOugXNnRAs0ny0w==</string>
+    <string name="register_failed">Register Failed</string>
     <string name="from">From</string>
     <string name="to">To</string>
     <string name="subject">Subject</string>

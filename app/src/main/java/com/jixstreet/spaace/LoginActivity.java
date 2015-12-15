@@ -1,5 +1,7 @@
 package com.jixstreet.spaace;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -10,6 +12,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.jixstreet.spaace.activity.MainActivity;
+import com.jixstreet.spaace.fragment.SpaaceApplication;
 import com.jixstreet.spaace.utils.APIAgent;
 import com.jixstreet.spaace.utils.CommonConstants;
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -110,6 +114,8 @@ public class LoginActivity extends BaseActivity {
             @Override
             public void onStart() {
                 loginTV.setVisibility(View.INVISIBLE);
+                messageTV.setVisibility(View.INVISIBLE);
+                loginTV.setBackgroundColor(getResources().getColor(R.color.dark_gray));
                 loadingPB.setVisibility(View.VISIBLE);
             }
 
@@ -122,6 +128,17 @@ public class LoginActivity extends BaseActivity {
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 loginTV.setVisibility(View.VISIBLE);
                 loginTV.setText(R.string.Succeed);
+
+                try {
+                    savePreferences(response);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                startActivity(intent);
+
+                onBackPressed();
             }
 
             @Override
@@ -145,6 +162,12 @@ public class LoginActivity extends BaseActivity {
 
             }
         });
+    }
+
+    private void savePreferences(JSONObject response) throws JSONException {
+        SharedPreferences.Editor editor = SpaaceApplication.getInstance().getSharedPreferences().edit();
+        editor.putString(CommonConstants.ACCESS_TOKEN, response.getString(CommonConstants.ACCESS_TOKEN));
+        editor.apply();
     }
 
     private void checkIsFieldFilled() {
