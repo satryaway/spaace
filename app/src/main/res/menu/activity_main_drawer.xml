@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_explore"
+            android:icon="@drawable/ic_explore"
+            android:title="@string/explore" />
+        <item
+            android:id="@+id/nav_find_pro"
+            android:icon="@drawable/ic_find_pro"
+            android:title="@string/find_pro" />
+        <item
+            android:id="@+id/nav_ideas"
+            android:icon="@drawable/ic_idea"
+            android:title="@string/ideas" />
+        <item
+            android:id="@+id/nav_get_quotes"
+            android:icon="@drawable/ic_get_quote"
+            android:title="@string/get_quotes" />
+        <item
+            android:id="@+id/nav_store"
+            android:icon="@drawable/ic_store"
+            android:title="@string/store" />
+        <item
+            android:id="@+id/nav_contact"
+            android:icon="@drawable/ic_contact"
+            android:title="@string/contact" />
+    </group>
+
+</menu>
