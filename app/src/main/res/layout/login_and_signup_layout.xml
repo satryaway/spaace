@@ -11,8 +11,10 @@
         android:background="@color/soft_black_transparent_bg">
 
         <ImageView
+            android:id="@+id/logo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+
             android:layout_centerHorizontal="true"
             android:layout_marginTop="75dp"
             android:src="@drawable/alogo" />

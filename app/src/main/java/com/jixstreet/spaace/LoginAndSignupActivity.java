@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import com.jixstreet.spaace.activity.MainActivity;
+
 public class LoginAndSignupActivity extends BaseActivity {
 
     private TextView loginTV;
@@ -43,6 +45,14 @@ public class LoginAndSignupActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(LoginAndSignupActivity.this, SignUpActivity.class));
+            }
+        });
+
+        findViewById(R.id.logo).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(LoginAndSignupActivity.this, MainActivity.class));
+
             }
         });
     }
