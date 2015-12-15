@@ -168,6 +168,8 @@ public class LoginActivity extends BaseActivity {
         SharedPreferences.Editor editor = SpaaceApplication.getInstance().getSharedPreferences().edit();
         editor.putString(CommonConstants.ACCESS_TOKEN, response.getString(CommonConstants.ACCESS_TOKEN));
         editor.apply();
+
+        SpaaceApplication.getInstance().setToken(response.getString(CommonConstants.ACCESS_TOKEN));
     }
 
     private void checkIsFieldFilled() {

@@ -13,6 +13,7 @@ import com.jixstreet.spaace.utils.CommonConstants;
 public class SpaaceApplication extends Application {
     private static SpaaceApplication instance;
     private SharedPreferences preferences;
+    private String token;
 
     public synchronized static SpaaceApplication getInstance(){
         return instance;
@@ -27,5 +28,14 @@ public class SpaaceApplication extends Application {
 
     public SharedPreferences getSharedPreferences(){
         return preferences;
+    }
+
+    public String getToken() {
+        return this.token;
+    }
+
+    public void setToken(String token)
+    {
+        this.token = token;
     }
 }

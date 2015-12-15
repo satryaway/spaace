@@ -8,6 +8,8 @@ public class CommonConstants {
     public static final String BASE_URL = "http://spaace.herokuapp.com/";
     public static final String SERVICE_LOGIN = BASE_URL + "oauth/token";
     public static String SERVICE_SIGN_UP = BASE_URL + "api/v1/registrations";
+    public static String SERVICE_PROFILE= BASE_URL + "api/v1/profile";
+    public static String SERVICE_PORTOFOLIOS= BASE_URL + "api/v1/portofolios";
     public static String EMAIL = "email";
     public static String PASSWORD = "password";
     public static String GRANT_TYPE = "grant_type";
@@ -18,4 +20,6 @@ public class CommonConstants {
     public static String SPAACE = "SPAACE";
     public static String ACCESS_TOKEN = "access_token";
     public static String MESSAGE = "message";
+
+    public static String PORTOFOLIO = "PORTOFOLIO";
 }

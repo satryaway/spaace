@@ -1,6 +1,5 @@
 package com.jixstreet.spaace.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -23,6 +22,7 @@ import android.widget.TextView;
 import com.jixstreet.spaace.R;
 import com.jixstreet.spaace.fragment.ContactFragment;
 import com.jixstreet.spaace.fragment.EditProfileFragment;
+import com.jixstreet.spaace.fragment.ExploreFragment;
 import com.jixstreet.spaace.fragment.QuoteFragment;
 
 
@@ -59,11 +59,11 @@ public class MainActivity extends AppCompatActivity
 
         navigationView.addHeaderView(headerView);
 
-//        fragment = ExploreFragment.newInstance(this);
-//        toolbarTitle.setText(getString(R.string.explore));
-//        if (fragment != null) {
-//            getSupportFragmentManager().beginTransaction().replace(R.id.content, fragment).commit();
-//        }
+        fragment = ExploreFragment.newInstance(this);
+        toolbarTitle.setText(getString(R.string.explore));
+        if (fragment != null) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.content, fragment).commit();
+        }
 
 
         imageProfile.setOnClickListener(new View.OnClickListener() {
@@ -81,13 +81,6 @@ public class MainActivity extends AppCompatActivity
                 toolbarTitle.setText(getString(R.string.edit_profile));
                 drawer.closeDrawer(GravityCompat.START);
                 getSupportFragmentManager().beginTransaction().replace(R.id.content, fragment).commit();
-            }
-        });
-
-        findViewById(R.id.content).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, ExploreDetailActivity.class));
             }
         });
 
@@ -147,7 +140,7 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_explore) {
-//            fragment = ExploreFragment.newInstance(this);
+            fragment = ExploreFragment.newInstance(this);
             toolbarTitle.setText(getString(R.string.explore));
         } else if (id == R.id.nav_find_pro) {
 //            fragment = NewsFragment.newInstance();
