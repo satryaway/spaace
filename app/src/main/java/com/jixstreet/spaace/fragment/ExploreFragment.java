@@ -58,17 +58,8 @@ public class ExploreFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_home, container, false);
 
         initUI();
+        setCallBack();
         getPortofolio();
-
-        listFeed.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Portofolio portofolio = listPortofolio.get(position);
-                Intent intent = new Intent(getActivity(), ExploreDetailActivity.class);
-                intent.putExtra(CommonConstants.PORTOFOLIO, portofolio);
-                getActivity().startActivity(intent);
-            }
-        });
 
         return view;
     }
@@ -78,14 +69,24 @@ public class ExploreFragment extends Fragment {
         progressBar = (ProgressBar) view.findViewById(R.id.progressBar);
     }
 
+    private void setCallBack() {
+        listFeed.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Portofolio portofolio = listPortofolio.get(position);
+                Intent intent = new Intent(getActivity(), ExploreDetailActivity.class);
+                intent.putExtra(CommonConstants.PORTOFOLIO, portofolio);
+                getActivity().startActivity(intent);
+            }
+        });
+    }
+
 
     public void getPortofolio() {
         String url = CommonConstants.SERVICE_PORTOFOLIOS;
 
         RequestParams requestParams = new RequestParams();
         requestParams.put(CommonConstants.ACCESS_TOKEN, SpaaceApplication.getInstance().getToken());
-//        requestParams.put(CommonConstants.ACCESS_TOKEN, "1ee30455f1cc857b39127ac312fc8c6f472afbad71e549a2246233627a20d0e6");
-
 
         APIAgent.get(url, requestParams, new JsonHttpResponseHandler() {
             @Override
@@ -100,8 +101,6 @@ public class ExploreFragment extends Fragment {
 
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
-                progressBar.setVisibility(View.GONE);
-
                 System.out.println(response.toString());
 
                 Gson gson = new Gson();
@@ -123,8 +122,7 @@ public class ExploreFragment extends Fragment {
 
             @Override
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
-
-
+                Toast.makeText(getActivity(), R.string.SERVER_DOWN_MSG, Toast.LENGTH_SHORT).show();
             }
         });
     }

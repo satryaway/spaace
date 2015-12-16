@@ -165,10 +165,6 @@ public class LoginActivity extends BaseActivity {
     }
 
     private void savePreferences(JSONObject response) throws JSONException {
-        SharedPreferences.Editor editor = SpaaceApplication.getInstance().getSharedPreferences().edit();
-        editor.putString(CommonConstants.ACCESS_TOKEN, response.getString(CommonConstants.ACCESS_TOKEN));
-        editor.apply();
-
         SpaaceApplication.getInstance().setToken(response.getString(CommonConstants.ACCESS_TOKEN));
     }
 

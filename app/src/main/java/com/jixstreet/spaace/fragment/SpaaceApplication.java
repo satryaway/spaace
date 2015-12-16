@@ -15,7 +15,7 @@ public class SpaaceApplication extends Application {
     private SharedPreferences preferences;
     private String token;
 
-    public synchronized static SpaaceApplication getInstance(){
+    public synchronized static SpaaceApplication getInstance() {
         return instance;
     }
 
@@ -26,16 +26,17 @@ public class SpaaceApplication extends Application {
         preferences = getSharedPreferences(CommonConstants.SPAACE, Context.MODE_PRIVATE);
     }
 
-    public SharedPreferences getSharedPreferences(){
+    public SharedPreferences getSharedPreferences() {
         return preferences;
     }
 
     public String getToken() {
-        return this.token;
+        return preferences.getString(CommonConstants.ACCESS_TOKEN, "");
     }
 
-    public void setToken(String token)
-    {
-        this.token = token;
+    public void setToken(String token) {
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString(CommonConstants.ACCESS_TOKEN, token);
+        editor.apply();
     }
 }
