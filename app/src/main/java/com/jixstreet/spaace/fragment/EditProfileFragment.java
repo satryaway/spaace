@@ -186,8 +186,7 @@ public class EditProfileFragment extends Fragment {
         String url = CommonConstants.SERVICE_PROFILE;
 
         RequestParams requestParams = new RequestParams();
-//        requestParams.put(CommonConstants.ACCESS_TOKEN, SpaaceApplication.getInstance().getToken());
-        requestParams.put(CommonConstants.ACCESS_TOKEN, "013d97585626f09069c50e25f5a8e244485c71659d7c942bbc623a97cd9b16cf");
+        requestParams.put(CommonConstants.ACCESS_TOKEN, SpaaceApplication.getInstance().getToken());
         requestParams.put(CommonConstants.EMAIL, email.getText().toString());
         requestParams.put(CommonConstants.PROFILE_FULL_NAME, fullName.getText().toString());
         requestParams.put(CommonConstants.PROFILE_REGION, region.getText().toString());
@@ -259,14 +258,15 @@ public class EditProfileFragment extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         Log.e("CODE", requestCode + " " + requestCode);
-
-        if ((requestCode == SELECT_PICTURE)) {
-            Uri selectedImageUri = data.getData();
-            Picasso.with(getActivity())
-                    .load(selectedImageUri)
-                    .into(imageProfile);
-            Log.e("CODE", selectedImageUri.getPath() + " ");
-            filePicture = new File(getRealPathFromURI(selectedImageUri));
+        if (resultCode == getActivity().RESULT_OK) {
+            if ((requestCode == SELECT_PICTURE)) {
+                Uri selectedImageUri = data.getData();
+                Picasso.with(getActivity())
+                        .load(selectedImageUri)
+                        .into(imageProfile);
+                Log.e("CODE", selectedImageUri.getPath() + " ");
+                filePicture = new File(getRealPathFromURI(selectedImageUri));
+            }
         }
     }
 
@@ -302,9 +302,9 @@ public class EditProfileFragment extends Fragment {
             Cursor cursor = null;
             int column_index;
             try {
-                String[] proj = { MediaStore.Images.Media.DATA };
-                cursor = getActivity().getContentResolver().query(uri,  proj, null, null, null);
-                 column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+                String[] proj = {MediaStore.Images.Media.DATA};
+                cursor = getActivity().getContentResolver().query(uri, proj, null, null, null);
+                column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
                 cursor.moveToFirst();
                 return cursor.getString(column_index);
             } finally {
