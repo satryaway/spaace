@@ -21,10 +21,16 @@ public class CommonConstants {
     public static String ACCESS_TOKEN = "access_token";
     public static String MESSAGE = "message";
 
-    public static String PORTOFOLIO = "PORTOFOLIO";
     public static String DEFAULT_TOKEN = "helloworld";
     public static int LOGIN_REQUEST_CODE = 27;
     public static String IS_LOGGED_IN = "is_logged_in";
     public static String FULL_NAME = "full_name";
     public static String PROFILE_THUMB = "profile_thumb";
+    
+    public static String PORTOFOLIO = "PORTOFOLIO";
+
+    public static String PROFILE_REGION = "user_profile_attributes[region]";
+    public static String PROFILE_FULL_NAME = "user_profile_attributes[full_name]";
+    public static String PROFILE_PICTURE = "profile_picture";
+
 }

@@ -12,7 +12,6 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.jixstreet.spaace.activity.MainActivity;
 import com.jixstreet.spaace.fragment.SpaaceApplication;
 import com.jixstreet.spaace.utils.APIAgent;
 import com.jixstreet.spaace.utils.CommonConstants;
@@ -98,6 +97,14 @@ public class LoginActivity extends BaseActivity {
                 if (isFormFilled) {
                     requestAuth();
                 }
+            }
+        });
+
+        findViewById(R.id.login).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                emailET.setText("fachripaul@gmail.com");
+                passwordET.setText("adminadmin");
             }
         });
     }

@@ -12,10 +12,9 @@ import com.loopj.android.http.RequestParams;
  * REQUEST HANDLER
  */
 public class APIAgent {
+    private static AsyncHttpClient client = new AsyncHttpClient();
     private Context context;
     private ProgressDialog progressDialog;
-    private static AsyncHttpClient client = new AsyncHttpClient();
-
 
     public static void get(String url, RequestParams params, AsyncHttpResponseHandler responseHandler) {
         client.get(url, params, responseHandler);
@@ -27,6 +26,9 @@ public class APIAgent {
 
     public static void put(String url, RequestParams params, AsyncHttpResponseHandler responseHandler) {
         client.put(url, params, responseHandler);
+    }
+    public static void patch(String url, RequestParams params, AsyncHttpResponseHandler responseHandler) {
+        client.patch(url, params, responseHandler);
     }
 
     public static void delete(String url, RequestParams params, AsyncHttpResponseHandler responseHandler) {
