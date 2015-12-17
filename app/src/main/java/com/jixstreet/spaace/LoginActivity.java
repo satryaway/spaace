@@ -135,8 +135,8 @@ public class LoginActivity extends BaseActivity {
                     e.printStackTrace();
                 }
 
-                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                startActivity(intent);
+                Intent intent = new Intent();
+                setResult(RESULT_OK, intent);
 
                 onBackPressed();
             }
@@ -159,13 +159,15 @@ public class LoginActivity extends BaseActivity {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-
             }
         });
     }
 
     private void savePreferences(JSONObject response) throws JSONException {
         SpaaceApplication.getInstance().setToken(response.getString(CommonConstants.ACCESS_TOKEN));
+        SharedPreferences.Editor editor = SpaaceApplication.getInstance().getSharedPreferences().edit();
+        editor.putBoolean(CommonConstants.IS_LOGGED_IN, true);
+        editor.apply();
     }
 
     private void checkIsFieldFilled() {

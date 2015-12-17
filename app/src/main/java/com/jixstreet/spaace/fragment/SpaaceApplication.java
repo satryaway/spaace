@@ -39,4 +39,8 @@ public class SpaaceApplication extends Application {
         editor.putString(CommonConstants.ACCESS_TOKEN, token);
         editor.apply();
     }
+
+    public boolean isLoggedIn() {
+        return getSharedPreferences().getBoolean(CommonConstants.IS_LOGGED_IN, false);
+    }
 }

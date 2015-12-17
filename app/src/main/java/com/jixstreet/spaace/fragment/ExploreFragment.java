@@ -86,7 +86,8 @@ public class ExploreFragment extends Fragment {
         String url = CommonConstants.SERVICE_PORTOFOLIOS;
 
         RequestParams requestParams = new RequestParams();
-        requestParams.put(CommonConstants.ACCESS_TOKEN, SpaaceApplication.getInstance().getToken());
+//        requestParams.put(CommonConstants.ACCESS_TOKEN, SpaaceApplication.getInstance().getToken());
+        requestParams.put(CommonConstants.ACCESS_TOKEN, CommonConstants.DEFAULT_TOKEN);
 
         APIAgent.get(url, requestParams, new JsonHttpResponseHandler() {
             @Override

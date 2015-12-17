@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.jixstreet.spaace.activity.MainActivity;
+import com.jixstreet.spaace.utils.CommonConstants;
 
 public class LoginAndSignupActivity extends BaseActivity {
 
@@ -37,7 +38,7 @@ public class LoginAndSignupActivity extends BaseActivity {
         loginTV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(LoginAndSignupActivity.this, LoginActivity.class));
+                startActivityForResult(new Intent(LoginAndSignupActivity.this, LoginActivity.class), CommonConstants.LOGIN_REQUEST_CODE);
             }
         });
 
@@ -55,5 +56,14 @@ public class LoginAndSignupActivity extends BaseActivity {
 
             }
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == CommonConstants.LOGIN_REQUEST_CODE && resultCode == RESULT_OK) {
+            Intent intent = new Intent();
+            setResult(RESULT_OK, intent);
+            finish();
+        }
     }
 }

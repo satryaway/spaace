@@ -1,5 +1,7 @@
 package com.jixstreet.spaace.activity;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -18,12 +20,26 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.jixstreet.spaace.LoginAndSignupActivity;
 import com.jixstreet.spaace.R;
 import com.jixstreet.spaace.fragment.ContactFragment;
 import com.jixstreet.spaace.fragment.EditProfileFragment;
 import com.jixstreet.spaace.fragment.ExploreFragment;
 import com.jixstreet.spaace.fragment.QuoteFragment;
+import com.jixstreet.spaace.fragment.SpaaceApplication;
+import com.jixstreet.spaace.model.ProfileUser;
+import com.jixstreet.spaace.utils.APIAgent;
+import com.jixstreet.spaace.utils.CommonConstants;
+import com.loopj.android.http.JsonHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
+import com.squareup.picasso.Picasso;
+
+import org.json.JSONObject;
+
+import cz.msebera.android.httpclient.Header;
 
 
 public class MainActivity extends AppCompatActivity
@@ -31,20 +47,34 @@ public class MainActivity extends AppCompatActivity
 
     private Toolbar toolbar;
     private TextView toolbarTitle;
-    private  DrawerLayout drawer;
+    private DrawerLayout drawer;
 
     private Fragment fragment;
+    private View navigationDrawerHeaderView;
+    private ImageView imageProfile;
+    private TextView nameProfile;
+    private ProfileUser profileUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        initUI();
+        setCallBack();
+
+        if (SpaaceApplication.getInstance().isLoggedIn())
+            putData();
+        else
+            requestUserObject();
+    }
+
+    private void initUI() {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbarTitle = (TextView) findViewById(R.id.toolbar_title);
         setSupportActionBar(toolbar);
 
-         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
@@ -53,40 +83,80 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        View headerView = LayoutInflater.from(this).inflate(R.layout.nav_header_main, null);
-        final ImageView imageProfile = (ImageView) headerView.findViewById(R.id.image_profile);
-        final TextView nameProfile = (TextView) headerView.findViewById(R.id.name_profile);
+        navigationDrawerHeaderView = LayoutInflater.from(this).inflate(R.layout.nav_header_main, null);
+        imageProfile = (ImageView) navigationDrawerHeaderView.findViewById(R.id.image_profile);
+        nameProfile = (TextView) navigationDrawerHeaderView.findViewById(R.id.name_profile);
 
-        navigationView.addHeaderView(headerView);
+        navigationView.addHeaderView(navigationDrawerHeaderView);
 
         fragment = ExploreFragment.newInstance(this);
         toolbarTitle.setText(getString(R.string.explore));
         if (fragment != null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.content, fragment).commit();
         }
-
-
-        imageProfile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                imageProfile.setImageResource(R.drawable.ic_avatar_sample);
-                nameProfile.setText("Jeese Heisenberg");
-            }
-        });
-
-        nameProfile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                fragment = EditProfileFragment.newInstance(MainActivity.this);
-                toolbarTitle.setText(getString(R.string.edit_profile));
-                drawer.closeDrawer(GravityCompat.START);
-                getSupportFragmentManager().beginTransaction().replace(R.id.content, fragment).commit();
-            }
-        });
-
-
     }
 
+    private void setCallBack() {
+        navigationDrawerHeaderView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (SpaaceApplication.getInstance().isLoggedIn()) {
+                    fragment = EditProfileFragment.newInstance(MainActivity.this);
+                    toolbarTitle.setText(getString(R.string.edit_profile));
+                    drawer.closeDrawer(GravityCompat.START);
+                    getSupportFragmentManager().beginTransaction().replace(R.id.content, fragment).commit();
+                } else {
+                    Intent intent = new Intent(MainActivity.this, LoginAndSignupActivity.class);
+                    startActivityForResult(intent, CommonConstants.LOGIN_REQUEST_CODE);
+                }
+            }
+        });
+    }
+
+    private void requestUserObject() {
+        String url = CommonConstants.SERVICE_PROFILE;
+
+        RequestParams requestParams = new RequestParams();
+        requestParams.put(CommonConstants.ACCESS_TOKEN, CommonConstants.DEFAULT_TOKEN);
+
+        APIAgent.get(url, requestParams, new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                System.out.println(response.toString());
+
+                Gson gson = new Gson();
+                profileUser = gson.fromJson(response.toString(), ProfileUser.class);
+
+                savePreferences();
+
+                putData();
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                Toast.makeText(MainActivity.this, R.string.RTO, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                super.onFailure(statusCode, headers, throwable, errorResponse);
+            }
+        });
+    }
+
+    private void savePreferences() {
+        SharedPreferences.Editor editor = SpaaceApplication.getInstance().getSharedPreferences().edit();
+        editor.putString(CommonConstants.FULL_NAME, profileUser.profile.fullName);
+        editor.putString(CommonConstants.PROFILE_THUMB, profileUser.profilePictureThumb);
+        editor.apply();
+    }
+
+    private void putData() {
+        String profileName = SpaaceApplication.getInstance().getSharedPreferences().getString(CommonConstants.FULL_NAME, getResources().getString(R.string.login_or_signup));
+        String profileThumb = SpaaceApplication.getInstance().getSharedPreferences().getString(CommonConstants.PROFILE_THUMB, "drawable://" + R.drawable.ic_avatar);
+        Picasso.with(this).load(profileThumb).into(imageProfile);
+        nameProfile.setText(profileName);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
