@@ -25,6 +25,7 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.jixstreet.spaace.LoginAndSignupActivity;
 import com.jixstreet.spaace.R;
+import com.jixstreet.spaace.extensions.BlurActionBarDrawerToggle;
 import com.jixstreet.spaace.fragment.ContactFragment;
 import com.jixstreet.spaace.fragment.EditProfileFragment;
 import com.jixstreet.spaace.fragment.ExploreFragment;
@@ -54,6 +55,7 @@ public class MainActivity extends AppCompatActivity
     private ImageView imageProfile;
     private TextView nameProfile;
     private ProfileUser profileUser;
+    private BlurActionBarDrawerToggle blurActionBarDrawerToggle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,6 +84,7 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        navigationView.setItemIconTintList(null);
 
         navigationDrawerHeaderView = LayoutInflater.from(this).inflate(R.layout.nav_header_main, null);
         imageProfile = (ImageView) navigationDrawerHeaderView.findViewById(R.id.image_profile);
@@ -94,6 +97,11 @@ public class MainActivity extends AppCompatActivity
         if (fragment != null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.content, fragment).commit();
         }
+
+        /*BlurAndDimView blurAndDimView = (BlurAndDimView) findViewById(R.id.blurrer);
+
+        blurActionBarDrawerToggle = new BlurActionBarDrawerToggle(this, drawer, 0,0, blurAndDimView);
+        drawer.setDrawerListener(blurActionBarDrawerToggle);*/
     }
 
     private void setCallBack() {
@@ -153,8 +161,11 @@ public class MainActivity extends AppCompatActivity
 
     private void putData() {
         String profileName = SpaaceApplication.getInstance().getSharedPreferences().getString(CommonConstants.FULL_NAME, getResources().getString(R.string.login_or_signup));
-        String profileThumb = SpaaceApplication.getInstance().getSharedPreferences().getString(CommonConstants.PROFILE_THUMB, "drawable://" + R.drawable.ic_avatar);
-        Picasso.with(this).load(profileThumb).into(imageProfile);
+        String profileThumb = SpaaceApplication.getInstance().getSharedPreferences().getString(CommonConstants.PROFILE_THUMB, "");
+        if (profileThumb.isEmpty())
+            Picasso.with(this).load(R.drawable.ic_avatar).into(imageProfile);
+        else
+            Picasso.with(this).load(profileThumb).into(imageProfile);
         nameProfile.setText(profileName);
     }
 

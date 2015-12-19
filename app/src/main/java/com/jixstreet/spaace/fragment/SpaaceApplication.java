@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 import com.jixstreet.spaace.utils.CommonConstants;
+import com.jixstreet.spaace.utils.FontsOverride;
 
 /**
  * Created by satryaway on 12/15/2015.
@@ -22,6 +23,7 @@ public class SpaaceApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        FontsOverride.overrideFonts(this);
         instance = this;
         preferences = getSharedPreferences(CommonConstants.SPAACE, Context.MODE_PRIVATE);
     }
