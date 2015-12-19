@@ -26,6 +26,7 @@
         <!--<activity android:name=".activity.MainActivity" />-->
         <activity android:name=".LoginAndSignupActivity" />
         <activity android:name=".activity.ExploreDetailActivity"></activity>
+        <activity android:name=".WelcomeActivity"></activity>
     </application>
 
 </manifest>

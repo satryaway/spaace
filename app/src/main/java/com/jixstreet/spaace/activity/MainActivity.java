@@ -64,11 +64,6 @@ public class MainActivity extends AppCompatActivity
 
         initUI();
         setCallBack();
-
-        if (SpaaceApplication.getInstance().isLoggedIn())
-            putData();
-        else
-            requestUserObject();
     }
 
     private void initUI() {
@@ -99,7 +94,6 @@ public class MainActivity extends AppCompatActivity
         }
 
         /*BlurAndDimView blurAndDimView = (BlurAndDimView) findViewById(R.id.blurrer);
-
         blurActionBarDrawerToggle = new BlurActionBarDrawerToggle(this, drawer, 0,0, blurAndDimView);
         drawer.setDrawerListener(blurActionBarDrawerToggle);*/
     }
@@ -114,6 +108,7 @@ public class MainActivity extends AppCompatActivity
                     drawer.closeDrawer(GravityCompat.START);
                     getSupportFragmentManager().beginTransaction().replace(R.id.content, fragment).commit();
                 } else {
+                    drawer.closeDrawer(GravityCompat.START);
                     Intent intent = new Intent(MainActivity.this, LoginAndSignupActivity.class);
                     startActivityForResult(intent, CommonConstants.LOGIN_REQUEST_CODE);
                 }
@@ -134,9 +129,7 @@ public class MainActivity extends AppCompatActivity
 
                 Gson gson = new Gson();
                 profileUser = gson.fromJson(response.toString(), ProfileUser.class);
-
                 savePreferences();
-
                 putData();
             }
 
@@ -162,10 +155,12 @@ public class MainActivity extends AppCompatActivity
     private void putData() {
         String profileName = SpaaceApplication.getInstance().getSharedPreferences().getString(CommonConstants.FULL_NAME, getResources().getString(R.string.login_or_signup));
         String profileThumb = SpaaceApplication.getInstance().getSharedPreferences().getString(CommonConstants.PROFILE_THUMB, "");
+
         if (profileThumb.isEmpty())
             Picasso.with(this).load(R.drawable.ic_avatar).into(imageProfile);
         else
             Picasso.with(this).load(profileThumb).into(imageProfile);
+
         nameProfile.setText(profileName);
     }
 
@@ -245,5 +240,15 @@ public class MainActivity extends AppCompatActivity
 
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        if (SpaaceApplication.getInstance().isLoggedIn())
+            putData();
+        else
+            requestUserObject();
     }
 }

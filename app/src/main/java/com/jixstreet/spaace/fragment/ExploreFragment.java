@@ -60,7 +60,6 @@ public class ExploreFragment extends Fragment {
 
         initUI();
         setCallBack();
-        getPortofolio();
 
         return view;
     }
@@ -131,4 +130,9 @@ public class ExploreFragment extends Fragment {
         });
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        getPortofolio();
+    }
 }
