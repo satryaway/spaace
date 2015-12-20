@@ -13,14 +13,20 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
+
     <android.support.design.widget.NavigationView
         android:id="@+id/nav_view"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
+        android:background="@color/darker_black_transparent_bg"
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/nav_header_main_view"
-        app:menu="@menu/activity_main_drawer"
-        app:theme="@style/ThemeOverlay.AppCompat.Dark" />
+        app:itemTextColor="@color/white"
+        app:menu="@menu/activity_main_drawer" />
 
+    <!--<com.jixstreet.spaace.extensions.BlurAndDimView
+        android:id="@+id/blurrer"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent" />-->
 </android.support.v4.widget.DrawerLayout>

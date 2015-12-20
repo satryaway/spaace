@@ -1,6 +1,9 @@
 package com.jixstreet.spaace;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
@@ -54,7 +57,8 @@ public class SignUpActivity extends BaseActivity {
         passwordET = (EditText) findViewById(R.id.password_et);
         signUpTV = (TextView) findViewById(R.id.signup_tv);
         messageTV = (TextView) findViewById(R.id.message_tv);
-        loadingPB = (ProgressBar) findViewById(R.id.loading_pb);    }
+        loadingPB = (ProgressBar) findViewById(R.id.loading_pb);
+    }
 
     @Override
     public void setCallBack() {
@@ -111,7 +115,7 @@ public class SignUpActivity extends BaseActivity {
 
         AsyncHttpClient asyncHttpClient = new AsyncHttpClient();
         asyncHttpClient.addHeader(CommonConstants.API_TOKEN, getString(R.string.api_token_header));
-        asyncHttpClient.post(url, requestParams, new JsonHttpResponseHandler(){
+        asyncHttpClient.post(url, requestParams, new JsonHttpResponseHandler() {
             @Override
             public void onStart() {
                 signUpTV.setVisibility(View.INVISIBLE);
@@ -130,12 +134,26 @@ public class SignUpActivity extends BaseActivity {
 
                 try {
                     JSONObject object = response.getJSONObject(CommonConstants.META);
-                    Toast.makeText(SignUpActivity.this, object.getString(CommonConstants.MESSAGE), Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(SignUpActivity.this, object.getString(CommonConstants.MESSAGE), Toast.LENGTH_SHORT).show();
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
 
-                onBackPressed();
+                Handler mHandler = new Handler(Looper.getMainLooper());
+                int SPLASH_TIME_OUT = 2000;
+                mHandler.postDelayed(new Runnable() {
+
+                    @Override
+                    public void run() {
+                        Intent intent = new Intent(SignUpActivity.this, WelcomeActivity.class);
+                        startActivityForResult(intent, CommonConstants.LOGIN_REQUEST_CODE);
+
+                        Intent intent1 = new Intent();
+                        setResult(RESULT_OK, intent1);
+                        onBackPressed();
+                    }
+                }, SPLASH_TIME_OUT);
+
             }
 
             @Override

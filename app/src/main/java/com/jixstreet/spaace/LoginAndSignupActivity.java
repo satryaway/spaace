@@ -45,7 +45,7 @@ public class LoginAndSignupActivity extends BaseActivity {
         signupTV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(LoginAndSignupActivity.this, SignUpActivity.class));
+                startActivityForResult(new Intent(LoginAndSignupActivity.this, SignUpActivity.class), CommonConstants.LOGIN_REQUEST_CODE);
             }
         });
 

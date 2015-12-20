@@ -6,7 +6,10 @@
     <color name="blue_fb">#3B5998</color>
     <color name="white">#ffffff</color>
     <color name="soft_black_transparent_bg">#60000000</color>
-    <color name="black_transparent_bg">#99000000</color>
+    <color name="black_transparent_bg">#96000000</color>
+    <color name="black_55_transparent_bg">#8C000000</color>
+    <color name="darker_black_transparent_bg">#CC000000</color>
+    <color name="dark_black_transparent_bg">#E6000000</color>
     <color name="dark_gray">#393939</color>
     <color name="ligth_gray">#ACACAC</color>
     <color name="darker_gray">#757575</color>
