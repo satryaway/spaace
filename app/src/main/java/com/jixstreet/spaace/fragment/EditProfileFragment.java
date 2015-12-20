@@ -3,12 +3,8 @@ package com.jixstreet.spaace.fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.database.Cursor;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
-import android.provider.DocumentsContract;
-import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
@@ -30,6 +26,7 @@ import com.jixstreet.spaace.utils.CommonConstants;
 import com.jixstreet.spaace.utils.PermissionManager;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
+import com.soundcloud.android.crop.Crop;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
@@ -92,11 +89,7 @@ public class EditProfileFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 PermissionManager.getInstance().checkPermissionReadStorage(getActivity());
-                Intent intent = new Intent();
-                intent.setType("image/*");
-                intent.setAction(Intent.ACTION_GET_CONTENT);
-                startActivityForResult(Intent.createChooser(intent,
-                        "Select Picture"), SELECT_PICTURE);
+                Crop.pickImage(getActivity(), EditProfileFragment.this);
             }
         });
 
@@ -256,62 +249,25 @@ public class EditProfileFragment extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        Log.e("CODE", requestCode + " " + requestCode);
-        if (resultCode == getActivity().RESULT_OK) {
-            if ((requestCode == SELECT_PICTURE)) {
-                Uri selectedImageUri = data.getData();
-                Picasso.with(getActivity())
-                        .load(selectedImageUri)
-                        .into(imageProfile);
-                Log.e("CODE", selectedImageUri.getPath() + " ");
-                filePicture = new File(getRealPathFromURI(selectedImageUri));
-            }
+        if (requestCode == Crop.REQUEST_PICK && resultCode == getActivity().RESULT_OK) {
+            beginCrop(data.getData());
+        } else if (requestCode == Crop.REQUEST_CROP) {
+            handleCrop(resultCode, data);
         }
     }
 
+    private void beginCrop(Uri source) {
+        Uri destination = Uri.fromFile(new File(getActivity().getCacheDir(), "cropped"));
+        Crop.of(source, destination).asSquare().withMaxSize(1080,1080).start(getActivity(), EditProfileFragment.this);
+    }
 
-    public String getRealPathFromURI(Uri uri) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            String wholeID = DocumentsContract.getDocumentId(uri);
-
-            // Split at colon, use second item in the array
-            String id = wholeID.split(":")[1];
-
-            String[] column = {MediaStore.Images.Media.DATA};
-
-            // where id is equal to
-            String sel = MediaStore.Images.Media._ID + "=?";
-
-            Cursor cursor = getActivity().getContentResolver().
-                    query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
-                            column, sel, new String[]{id}, null);
-
-            String filePath = "";
-
-            int columnIndex = cursor.getColumnIndex(column[0]);
-
-            if (cursor.moveToFirst()) {
-                filePath = cursor.getString(columnIndex);
-            }
-            cursor.close();
-
-            return filePath;
-        } else {
-
-            Cursor cursor = null;
-            int column_index;
-            try {
-                String[] proj = {MediaStore.Images.Media.DATA};
-                cursor = getActivity().getContentResolver().query(uri, proj, null, null, null);
-                column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-                cursor.moveToFirst();
-                return cursor.getString(column_index);
-            } finally {
-                if (cursor != null) {
-                    cursor.close();
-                }
-            }
-//            return cursor.getString(column_index);
+    private void handleCrop(int resultCode, Intent result) {
+        if (resultCode == getActivity().RESULT_OK) {
+            Picasso.with(getActivity())
+                    .load(Crop.getOutput(result))
+                    .into(imageProfile);
+        } else if (resultCode == Crop.RESULT_ERROR) {
+            Toast.makeText(getActivity(), Crop.getError(result).getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
 

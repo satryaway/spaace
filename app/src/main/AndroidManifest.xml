@@ -27,6 +27,9 @@
         <activity android:name=".LoginAndSignupActivity" />
         <activity android:name=".activity.ExploreDetailActivity"></activity>
         <activity android:name=".WelcomeActivity"></activity>
+
+        <activity android:name="com.soundcloud.android.crop.CropImageActivity" />
+
     </application>
 
 </manifest>

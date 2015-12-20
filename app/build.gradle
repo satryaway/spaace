@@ -29,4 +29,6 @@ dependencies {
     compile 'com.android.support:cardview-v7:23.0.1'
     compile 'org.lucasr.twowayview:twowayview:0.1.4'
     compile 'com.google.code.gson:gson:2.4'
+    compile 'com.soundcloud.android:android-crop:1.0.1@aar'
+
 }
