@@ -137,8 +137,7 @@ public class EditProfileFragment extends Fragment {
         String url = CommonConstants.SERVICE_PROFILE;
 
         RequestParams requestParams = new RequestParams();
-//        requestParams.put(CommonConstants.ACCESS_TOKEN, SpaaceApplication.getInstance().getToken());
-        requestParams.put(CommonConstants.ACCESS_TOKEN, "013d97585626f09069c50e25f5a8e244485c71659d7c942bbc623a97cd9b16cf");
+        requestParams.put(CommonConstants.ACCESS_TOKEN, SpaaceApplication.getInstance().getToken());
 
 
         APIAgent.get(url, requestParams, new JsonHttpResponseHandler() {
