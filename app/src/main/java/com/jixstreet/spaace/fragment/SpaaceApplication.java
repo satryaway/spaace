@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.facebook.FacebookSdk;
 import com.jixstreet.spaace.utils.CommonConstants;
 import com.jixstreet.spaace.utils.FontsOverride;
 
@@ -23,6 +24,7 @@ public class SpaaceApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        FacebookSdk.sdkInitialize(getApplicationContext());
         FontsOverride.overrideFonts(this);
         instance = this;
         preferences = getSharedPreferences(CommonConstants.SPAACE, Context.MODE_PRIVATE);
