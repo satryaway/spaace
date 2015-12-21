@@ -30,4 +30,6 @@ dependencies {
     compile 'org.lucasr.twowayview:twowayview:0.1.4'
     compile 'com.google.code.gson:gson:2.4'
     compile 'com.facebook.android:facebook-android-sdk:4.6.0'
+    compile 'com.soundcloud.android:android-crop:1.0.1@aar'
+
 }

@@ -390,7 +390,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/other_project"
-            android:layout_marginBottom="80dp"
+            android:layout_marginBottom="100dp"
             android:orientation="horizontal"
             android:padding="@dimen/activity_horizontal_margin" />
     </RelativeLayout>
