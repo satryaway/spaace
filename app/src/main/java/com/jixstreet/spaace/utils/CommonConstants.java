@@ -10,6 +10,7 @@ public class CommonConstants {
     public static String SERVICE_SIGN_UP = BASE_URL + "api/v1/registrations";
     public static String SERVICE_PROFILE= BASE_URL + "api/v1/profile";
     public static String SERVICE_PORTOFOLIOS= BASE_URL + "api/v1/portofolios";
+    public static String SERVICE_LOGIN_FB = BASE_URL + "api/v1/auth_facebook";
     public static String EMAIL = "email";
     public static String PASSWORD = "password";
     public static String GRANT_TYPE = "grant_type";

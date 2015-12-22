@@ -7,23 +7,24 @@ import com.google.gson.annotations.SerializedName;
  */
 public class ProfileUser {
 
-//    {
-//        "id": 322,
-//            "email": "fachripaul@gmail.com",
-//            "username": null,
-//            "uid": null,
-//            "provider": null,
-//            "fb_access_token": null,
-//            "profile": {
-//        "fullName": "password",
-//                "region": null
-//    },
-//        "profile_picture_ori": null,
-//            "profile_picture_medium": null,
-//            "profile_picture_thumb": null,
-//            "created_at": "2015-12-15T17:46:14.000Z",
-//            "updated_at": "2015-12-15T17:48:24.000Z"
-//    }
+    /*{
+            "id": 2,
+            "email": "kubido@gmail.com",
+            "username": null,
+            "uid": null,
+            "provider": null,
+            "fb_access_token": null,
+            "profile": {
+                "full_name": null,
+                "region": null
+            },
+            "company_profile": null,
+            "profile_picture_ori": null,
+            "profile_picture_medium": null,
+            "profile_picture_thumb": null,
+            "created_at": "2015-11-25T10:14:57.000Z",
+            "updated_at": "2015-11-25T13:52:10.000Z"
+    }*/
 
     @SerializedName("id")
     public String id;
@@ -34,6 +35,9 @@ public class ProfileUser {
     @SerializedName("username")
     public String username;
 
+    @SerializedName("uid")
+    public String uid;
+
     @SerializedName("provider")
     public String provider;
 
@@ -42,6 +46,9 @@ public class ProfileUser {
 
     @SerializedName("profile")
     public Profile profile;
+
+    @SerializedName("company_profile")
+    public String companyProfile;
 
     @SerializedName("profile_picture_ori")
     public String profile_PictureOri;
